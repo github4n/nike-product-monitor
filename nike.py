@@ -1,7 +1,7 @@
 #-*-encoding:utf8:-*-
 ''' --------------------------------- INPUT YOUR CONFIG --------------------------------- '''
-MONITOR_DELAY = 1 # second, if your input 10, monitor interval 10 second
-discord_webhook = 'https://discordapp.com/api/webhooks/562219697173561347/sIEgYBEKFf9vmMsz_k3uAyYYiNeDwCrM1TOGPvWiH3f4S4dgwjXR0qsYTP7ZbhJ1y8ij'
+MONITOR_DELAY = 30 # second, if your input 10, monitor interval 10 second
+discord_webhook = 'YOUR_WEBHOOK'
 
 ''' ------------------------------------------------------------------------------------- '''
 import requests
@@ -227,7 +227,6 @@ def monitor():
                 try:
                     products_list[pId]
                 except:
-                    print("새거:", pUrl)
                     color, code = get_detail(pUrl)
                     log('s', "Added " + name + " to the database.")
                     products_list[pId] = Product(itemLocation,name,code,color, price, iUrl, pUrl,pTime)
