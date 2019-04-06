@@ -1,6 +1,7 @@
 #-*-encoding:utf8:-*-
 ''' --------------------------------- INPUT YOUR CONFIG --------------------------------- '''
 MONITOR_DELAY = 30 # second, if your input 10, monitor interval 10 second
+PAGE_DELAY = 4 # Page to Page Delay second
 discord_webhook = 'YOUR_WEBHOOK'
 startPage = 1
 endPage = 5 # example 1 ~ 5 -> include(1,2,3,4,5)
@@ -169,7 +170,7 @@ def build_db():
                 products_list[pId] = Product(itemLocation,name,code,color, price, iUrl, pUrl,pTime)
             except:
                 pass
-        time.sleep(2)
+        time.sleep(PAGE_DELAY)
 def get_detail(_url):
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
@@ -231,7 +232,7 @@ def monitor():
                     send_embed('NEW', products_list[pId])
             except:
                 pass
-        time.sleep(2)
+        time.sleep(PAGE_DELAY)
     print('',flush=True)
 
 ''' --------------------------------- RUN --------------------------------- '''
