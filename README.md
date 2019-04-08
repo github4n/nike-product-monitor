@@ -8,7 +8,7 @@ This can be used to monitor any site on a product release date to automatically 
 when a product has been uploaded. Useful when monitoring hundreds of sites for shops in different timezones.
 
 ## Usage:
-Add your Discord webhook URL in the appropriate fields and monitor delay time (sec)
+Add your Discord webhook URL in the appropriate fields and monitor delay time + Page delay time(sec)
 
 ## Complete:
 - find all products on Shopify site by keyword
@@ -17,8 +17,15 @@ Add your Discord webhook URL in the appropriate fields and monitor delay time (s
 - optimization for Shopify to return product checkout links by size
 - find all products on other sites by keyword
 - attempt to get product page links for universal sites
-- supreme new products
-- supreme restocks
+
+## Command
+```
+# After Installing the required packages
+# using by python 3.x ( recommend 3.6.x version because 3.7.x version not resolve package dependency )
+$ python3 nike.py 
+or
+$ python3 nike_ver2.py # you can modulate page to page delay to prevent site VAN 
+```
 
 ### Reference:
 @[NERYS-product-monitor-lite](https://github.com/Snivyn/NERYS-product-monitor-lite)
