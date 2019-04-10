@@ -208,31 +208,37 @@ def monitor():
                     r = requests.get(link, timeout=8, verify=False,headers=headers)
             except:
                 log('e', "Connection to URL <" + link + "> failed.")
-        bs = BeautifulSoup(r.text, 'lxml')
-        ul = bs.find('ul', class_='uk-grid item-list-wrap')
-        lis = ul.find_all('li')
-        if len(lis) == 0:
-            break
-        for li in lis:
-            try:
-                pId = str(li.find('input', {"name": "productId"})['value'])
-                pUrl = baseUrl + li.find('input', {"name": "producturl"})['value']
-                iUrl = li.find('img')['src']
-                name = li.find('span', class_='item-title').get_text().strip()
-                itemLocation = li.find('div', class_='item-location').get_text().strip()
-                price = li.find('span', class_='item-price').get_text().strip()
-                color = "COLOR"
-                code = "CODE"
+        try:
+            bs = BeautifulSoup(r.text, 'lxml')
+            ul = bs.find('ul', class_='uk-grid item-list-wrap')
+            lis = ul.find_all('li')
+            if len(lis) == 0:
+                break
+            for li in lis:
                 try:
-                    products_list[pId]
+                    pId = str(li.find('input', {"name": "productId"})['value'])
+                    pUrl = baseUrl + li.find('input', {"name": "producturl"})['value']
+                    iUrl = li.find('img')['src']
+                    name = li.find('span', class_='item-title').get_text().strip()
+                    itemLocation = li.find('div', class_='item-location').get_text().strip()
+                    price = li.find('span', class_='item-price').get_text().strip()
+                    color = "COLOR"
+                    code = "CODE"
+                    try:
+                        products_list[pId]
+                    except:
+                        color, code = get_detail(pUrl)
+                        log('s', "Added " + name + " to the database.")
+                        products_list[pId] = Product(itemLocation,name,code,color, price, iUrl, pUrl,pTime)
+                        send_embed('NEW', products_list[pId])
                 except:
-                    color, code = get_detail(pUrl)
-                    log('s', "Added " + name + " to the database.")
-                    products_list[pId] = Product(itemLocation,name,code,color, price, iUrl, pUrl,pTime)
-                    send_embed('NEW', products_list[pId])
-            except:
-                pass
-        time.sleep(PAGE_DELAY)
+                    pass
+            time.sleep(PAGE_DELAY)
+        except:
+            f = open("error.log","w",encoding='utf8')
+            f.write(r.text)
+            f.close()
+            pass
     print('',flush=True)
 
 ''' --------------------------------- RUN --------------------------------- '''
