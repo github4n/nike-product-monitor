@@ -17,7 +17,7 @@ Add your Discord webhook URL in the appropriate fields and monitor delay time + 
 - optimization for Shopify to return product checkout links by size
 - find all products on other sites by keyword
 - attempt to get product page links for universal sites
-
+- can you adjust product monitor quntity
 ## Command
 ```
 # After Installing the required packages
